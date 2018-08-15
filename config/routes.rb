@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
+
+  get 'sessions/new'
   resources :giftmoji_emotions
   resources :emotions
   resources :occasions
   devise_for :users
   resources :giftmojis
   resources :users
-  get '/' =>'index'
-  get 'sessions/new'
+  resources :sessions
+
+  get '/' =>'application#index'
   get '/users/:id' => 'users#show'
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
