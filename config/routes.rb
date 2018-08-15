@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :giftmojis
   resources :users
-
+  get '/' =>'index'
   get 'sessions/new'
   get '/users/:id' => 'users#show'
-  get '/users/new' => 'users#new'
-  get '/' =>'users#new'
+  get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get  '/logout' => 'sessions#destroy'
