@@ -14,11 +14,11 @@ class UsersController < ApplicationController
     end 
 
     def show 
-            if !!session[:user_id]
-                 @user = User.find_by_id(params[:id])
-            else 
-                redirect_to '/'
-            end
+        if !!session[:user_id]
+             @user = User.find_by_id(params[:id])
+        else 
+            redirect_to '/'
+        end
     end 
 
     def update 

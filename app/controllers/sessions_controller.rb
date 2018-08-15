@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
 		@user = User.find_by(email: params[:email])
 	end  
 	if @user
-    	return redirect_to 'signin' unless @user.authenticate(params[:password])
+    	return redirect_to 'login' unless @user.authenticate(params[:password])
     	session[:user_id] = @user.id 
     	redirect_to "/users/#{@user.id}"
     end
@@ -20,5 +20,5 @@ class SessionsController < ApplicationController
     session.delete :user_id 
     redirect_to '/'
   end 
-  
+
 end
