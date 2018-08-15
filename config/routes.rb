@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :occasions
   resources :transactions
   devise_for :users
   get 'sessions/new'
