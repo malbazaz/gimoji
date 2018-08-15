@@ -1,0 +1,10 @@
+<div class="info">
+<% if user_admin? %>
+<%= @users.each do |user| %>
+<p><%= link_to user.username, user_path(user) %>
+Name: <%= user.fullname %> - Giftcoins Balance: <%= user.giftcoins %>
+</p><% end %>
+<% else %>
+<p> No Access </p>
+<% end %>
+</div>
