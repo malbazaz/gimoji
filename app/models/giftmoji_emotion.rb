@@ -1,0 +1,2 @@
+class GiftmojiEmotion < ApplicationRecord
+end
