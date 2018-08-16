@@ -8,14 +8,24 @@
 <%= emo.name %>
 <% end %>
 
+<% if giftmoji_has_no_owner? %>
+<h3> Buy this Gimoji: </h3>
+<form action="/giftmojis/<%= @giftmoji.id%>/gift" method="post">
+<input id="hidden" type="hidden" name="_method" value="patch">
+<input type="submit" value="Buy Giftmoji" name="Buy Giftmoji" id="Buy Giftmoji">
+</form>
+
+
 <% if giftmoji_gifted? && giftmoji_owner? %>
 <h3>Occasion: <%= @giftmoji.occasion %></h3>
 <h3>Message: <%= @giftmoji.message %></h3>
 <% end %>
 
 <% if !giftmoji_gifted? && giftmoji_owner? %>
-Gift this Giftmoji:
+<h3>Gift this Giftmoji:</h3>
 <%= form_for @giftmoji.build do |f| %>
+<%= f.label "Gift Recipient:"
+<%= f.collection_select :user_id, User.all, :id, :name, include_blank: 'Any'%>
 <%= f.label "Occasion" %>
 <%= f.collection_select :occasion_id, Occasion.all, :id, :name, include_blank: 'Any'%>
 <%= f.fields_for :occasion, @giftmoji.occasions.last.build_occasion do |occasion_fields| %>
