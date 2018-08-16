@@ -1,13 +1,27 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-  resources :giftmoji_emotions
+  #Application
+  get '/' =>'application#index'
+
+  #Resources for Objects (other than users)
   resources :emotions
   resources :occasions
-  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' },  path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'register', sign_up: 'signup' }
   resources :giftmojis
-  resources :users
+  post '/giftmoji/:id/buy' => 'users#update'
+
+  #Nested resource for (Occasion - Gimojis) ??
+  resources :occasions, only [:show, :index] do 
+    resources :giftmojis, only [:show, :index]
+
+  #Nested resource (User -> Gimojis) ??
+
+  #Login 
+  get 'sessions/new'
   resources :sessions
+  resources :users
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' },  path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'register', sign_up: 'signup' }
+   get '/users/:id' => 'users#show'
+
 
  # devise_scope :user do
  # get 'login', to: 'sessions#new'
@@ -17,9 +31,7 @@ Rails.application.routes.draw do
  # post '/logout' => 'sessions#destroy'
  # end
 
-  get '/' =>'application#index'
-  get '/users/:id' => 'users#show'
-  post '/giftmoji/:id/buy' => 'users#update'
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

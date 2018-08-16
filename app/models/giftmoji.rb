@@ -13,4 +13,8 @@ class Giftmoji < ApplicationRecord
   	end 
   end
 
+  # add class method of [most expensive giftmoji]
+  # add class of gimoji with most emotions
+  # add most gifts on what occasion 
+
 end
