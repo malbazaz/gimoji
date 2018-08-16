@@ -17,6 +17,7 @@ before_action :authenticate_user!
     end 
 
     def update 
+        # need to add option to buy giftmoji but also gifting?
     end 
 
     

@@ -10,14 +10,14 @@
 
 <% if giftmoji_has_no_owner? %>
 <h3> Buy this Gimoji: </h3>
-<!--<form action="/giftmojis/<%= @giftmoji.id%>/buy" method="post">
+<!-- Alternative way of doing:
+<form action="/giftmojis/<%= @giftmoji.id%>/buy" method="post">
 <input id="hidden" type="hidden" name="_method" value="patch">
 <input type="submit" value="Buy Giftmoji" name="Buy Giftmoji" id="Buy Giftmoji">
 </form> -->
 <%= form_for @giftmoji, url:user_path(@user) do |f|%>
-<%= f.hidden_field :buy, :value => @user %>
+<%= f.hidden_field :buy, :value => @giftmoji %> <!-- Need to test this -->
 <%= f.submit "Buy Giftmoji"%>
-
 
 
 <% if giftmoji_gifted? && giftmoji_owner? %>
