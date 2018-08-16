@@ -1,6 +1,6 @@
-class SessionsController < ApplicationController
+class Users::SessionsController < Devise::SessionsController
+	
   def new
-  	render "sessions/new"
   end
 
   def create 

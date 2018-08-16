@@ -1,7 +1,7 @@
 <h1>Sessions#new</h1>
 <h2>Log in</h2>
 
-<%= form_for @user, :url => url_for(:controller => 'sessions', :action => 'create') do |f| %>
+<%= form_for @user, :url => url_for(:controller => 'users/sessions', :action => 'create') do |f| %>
 
   <div class="field">
     <%= f.label :username, "Login with your username" %><br />
