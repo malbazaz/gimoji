@@ -1,0 +1,28 @@
+<h2><%= @giftmoji.title %></h2>
+
+<h3> Tagline: <%= @giftmoji.tag %> </h3>
+<h4> Price: <%= @giftmoji.price %></h4>
+
+<h3>Emotions:</h3>
+<p> <% @giftmoji.emotions.each do |emo| %>
+<%= emo.name %>
+<% end %>
+
+<% if giftmoji_gifted && giftmoji_owner %>
+<h3>Occasion: <%= @giftmoji.occasion %></h3>
+<h3>Message: <%= @giftmoji.message %></h3>
+<% end %>
+
+<% if !giftmoji_gifted && giftmoji_owner %>
+Gift this Giftmoji:
+<%= form_for @giftmoji.build do |f| %>
+<%= f.label "Occasion" %>
+<%= f.collection_select :occasion_id, Occasion.all, :id, :name, include_blank: 'Any'%>
+<%= f.fields_for :occasion, @giftmoji.occasions.last.build_occasion do |occasion_fields| %>
+<%= occasion_fields.text_field :name %>
+<% end %>
+<%= f.label "Message: (Please sign in your name.)" %>
+<%= f.text_area :message %>
+<%= f.submit %>
+<% end %>
+<% end %>
