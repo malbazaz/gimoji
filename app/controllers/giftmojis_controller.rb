@@ -34,7 +34,8 @@ class GiftmojisController < ApplicationController
         @giftmoji = Giftmoji.find_by_id(params[:id])
     end 
 
-    def update 
+    def update
+    # need to update giftmoji by admin & update when gifted 
         @giftmoji = Giftmoji.find_by_id(params[:id])
         @giftmoji.update(attr_params)
         @giftmoji.save 
