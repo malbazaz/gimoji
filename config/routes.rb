@@ -3,15 +3,18 @@ Rails.application.routes.draw do
   #Application
   get '/' =>'application#index'
 
-  #Resources for Objects (other than users)
+  #Resources for Objects (Emotions, Occasions and Giftmojis)
   resources :emotions
+
   resources :occasions
+
   resources :giftmojis
   post '/giftmoji/:id/buy' => 'users#update'
 
-  #Nested resource for (Occasion - Gimojis) ??
+  #Nested resource for (Occasion - Gimojis)
   resources :occasions, only [:show, :index] do 
     resources :giftmojis, only [:show, :index]
+  end 
 
   #Nested resource (User -> Gimojis) ??
 
@@ -31,8 +34,4 @@ Rails.application.routes.draw do
  # post '/logout' => 'sessions#destroy'
  # end
 
-
-
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

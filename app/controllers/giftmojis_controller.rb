@@ -1,17 +1,23 @@
 class GiftmojisController < ApplicationController
 
     def new 
-        @giftmoji = Giftmoji.new 
+        if params[:occasion_id]
+            @giftmoji = Giftmoji.new(occasion_id: params[:occasion_id])
+        else 
+            @giftmoji = Giftmoji.new 
+        end 
         if session[:user_id]
             @user = User.find_by_id(session[:user_id])
             if @user.admin
                 render "new"
+            elsif @giftmoji.user_id == @user 
+                render "new" 
             end 
         end 
     end
 
     def create 
-        @giftmoji = Giftmoji.create(attr_params)
+        @giftmoji = Giftmoji.create(giftmoji_params)
         redirect_to "/giftmojis/#{@giftmoji.id}"
     end 
 
@@ -19,7 +25,11 @@ class GiftmojisController < ApplicationController
         
         if !!session[:user_id]
             @user = User.find_by_id(params[:id])
-            @giftmojis = Giftmoji.all
+            if params[:occasion_id]
+                @giftmojis = Occasion.find(params[:occasion_id]).giftmojis
+            else 
+                @giftmojis = Giftmoji.all
+            end
         else 
             redirect_to '/'
         end
@@ -43,7 +53,7 @@ class GiftmojisController < ApplicationController
     end 
     private 
 
-    def attr_params 
-        params.require(:giftmoji).permit(:name, :tag, :message, :emotions, :occasion, :user_id)
+    def giftmoji_params 
+        params.require(:giftmoji).permit(:name, :tag, :message, :emotions, :occasion_id, :user_id)
     end 
 end
