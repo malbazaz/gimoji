@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   post '/giftmoji/:id/buy' => 'users#update'
 
   #Nested resource for (Occasion - Gimojis)
-  resources :occasions, only [:show, :index] do 
-    resources :giftmojis, only [:show, :index]
-  end 
+ # resources :occasions, only [:show, :index] do 
+ #   resources :giftmojis, only [:show, :index]
+ # end 
 
   #Nested resource (User -> Gimojis) ??
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :users
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' },  path: 'auth', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'register', sign_up: 'signup' }
-   get '/users/:id' => 'users#show'
+  get '/users/:id' => 'users#show'
 
 
  # devise_scope :user do
