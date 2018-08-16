@@ -10,11 +10,10 @@
 
 <% if giftmoji_has_no_owner? %>
 <h3> Buy this Gimoji: </h3>
-<form action="/giftmojis/<%= @giftmoji.id%>/gift" method="post">
+<form action="/giftmojis/<%= @giftmoji.id%>/buy" method="post">
 <input id="hidden" type="hidden" name="_method" value="patch">
 <input type="submit" value="Buy Giftmoji" name="Buy Giftmoji" id="Buy Giftmoji">
 </form>
-
 
 <% if giftmoji_gifted? && giftmoji_owner? %>
 <h3>Occasion: <%= @giftmoji.occasion %></h3>
