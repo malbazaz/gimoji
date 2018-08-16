@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
+before_action :authenticate_user!
 
     def index
-        @users = User.all 
+        @users = User.all
+        render "users/index"
     end 
 
     def new
-        @user = User.new  
+        @user = User.new 
+        render "users/new"
     end 
     
     def create 
@@ -19,6 +22,7 @@ class UsersController < ApplicationController
         else 
             redirect_to '/'
         end
+        render "users/show"
     end 
 
     def update 

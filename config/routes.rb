@@ -9,14 +9,16 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
 
-  get '/' =>'application#index'
-  get '/users/:id' => 'users#show'
+  devise_scope :user do
+  get 'login', to: 'sessions#new'
   get '/signup' => 'users#new'
-  get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get  '/logout' => 'sessions#destroy'
   post '/logout' => 'sessions#destroy'
+end
 
+  get '/' =>'application#index'
+  get '/users/:id' => 'users#show'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
